@@ -28,7 +28,7 @@
                     <label class="custom-control-label" for="customCheck">Recuerdame</label>
                   </div>
                 </div>
-                <button type="submit"  class="btn btn-success btn-lg float-right" id="btnLogin">Login</button>
+                <button  (click)="auth.login()" *ngIf="!auth.loggedIn" type="submit"  class="btn btn-success btn-lg float-right" id="btnLogin">Login</button>
               </form>
             </div>
             <!--/card-block-->

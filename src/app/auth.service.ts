@@ -4,6 +4,7 @@ import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client';
 import { from, of, Observable, BehaviorSubject, combineLatest, throwError } from 'rxjs';
 import { tap, catchError, concatMap, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthService {
   auth0Client$ = (from(
     createAuth0Client({
       domain: "dev-dr819sa4.auth0.com",
-      client_id: "VDskZAaklylsBwiocWd3iZaXdcUnko8O",
+      client_id: "VLXvzmt2PIWL7gtfsfgngOIWmcaPvtFc",
       redirect_uri: `${window.location.origin}`
     })
   ) as Observable<Auth0Client>).pipe(
@@ -37,7 +38,7 @@ export class AuthService {
   // Create a local property for login status
   loggedIn: boolean = null;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private http: HttpClient) { }
 
   // When calling, options can be passed if desired
   // https://auth0.github.io/auth0-spa-js/classes/auth0client.html#getuser
@@ -106,15 +107,34 @@ export class AuthService {
     }
   }
 
+getTokenAccess(){
+      const urlToken = 'https://dev-dr819sa4.auth0.com/oauth/token'
+      const httpOptions = { headers: new HttpHeaders()
+                                  .set('Content-Type', 'application/x-www-form-urlencoded')
+                           };
+      const body = new HttpParams()
+          .set('client_id', 'VLXvzmt2PIWL7gtfsfgngOIWmcaPvtFc')
+          .set('client_secret', 'eN4sNOMP0Y5U9AnK6477DnUC2koJjZREeUqr0U8NlgLaLd5pwCsXmaKXrM_ZBbyd')
+          .set('audience', 'http://localhost:8585/api')
+          .set('grant_type', 'client_credentials');
+
+      this.http.post(urlToken, body.toString(), httpOptions)
+          .subscribe(res => {
+                  console.log(res);
+                  localStorage.setItem('access_token', res['access_token']);
+                   },
+            err => console.log(err)
+          );
+      }
+
   logout() {
     // Ensure Auth0 client instance exists
     this.auth0Client$.subscribe((client: Auth0Client) => {
       // Call method to log out
       client.logout({
-        client_id: "VDskZAaklylsBwiocWd3iZaXdcUnko8O",
+        client_id: "VLXvzmt2PIWL7gtfsfgngOIWmcaPvtFc",
         returnTo: `${window.location.origin}`
       });
     });
   }
-
 }

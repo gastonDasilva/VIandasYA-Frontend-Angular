@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth.service';
+import { ApiService } from './api.service';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +10,12 @@ import { AuthService } from './auth.service';
 export class AppComponent implements OnInit {
   title = 'viandas-ya-frontend';
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private api: ApiService ) {}
 
   ngOnInit() {
       this.auth.localAuthSetup();
       this.auth.handleAuthCallback();
+      this.auth.getTokenAccess();
+      this.api.ping$();
     }
 }
