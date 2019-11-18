@@ -16,6 +16,10 @@ export class AppComponent implements OnInit {
       this.auth.localAuthSetup();
       this.auth.handleAuthCallback();
       this.auth.getTokenAccess();
-      this.api.ping$();
+      this.ping();
+    }
+
+    ping(){
+    this.api.ping$();
     }
 }
