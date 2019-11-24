@@ -1,0 +1,54 @@
+<!--<main class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <button class="btn btn-danger btn-block" (click)="signInWithGoogle()">
+        <i class="fa fa-google"></i>
+        Iniciar con Google
+      </button>
+    </div>
+    <div class="col-md-6">
+    </div>
+  </div>
+</main>-->
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h5 class="card-title text-center">Iniciar Sesion</h5>
+          <form class="form-signin">
+            <div class="form-label-group">
+              <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+              <label for="inputEmail">Email address</label>
+            </div>
+
+            <div class="form-label-group">
+              <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+              <label for="inputPassword">Password</label>
+            </div>
+
+            <div class="custom-control custom-checkbox mb-3">
+              <input type="checkbox" class="custom-control-input" id="customCheck1">
+              <label class="custom-control-label" for="customCheck1">Recordar Contraseña</label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+            <hr class="my-4">
+            <button class="btn btn-lg btn-google btn-block " type="submit" (click)="signInWithGoogle()" ><i class="fa fa-google mr-2"></i> Iniciar con  Google</button>
+            <button class="btn btn-lg btn-facebook btn-block " type="submit"><i class="fa fa-facebook-f mr-2"></i> Iniciar con Facebook</button>
+          </form>
+
+          <!--<div class="col-md-6 " *ngIf="user">
+            <img src="{{ user.photoUrl }}">
+            <div>
+              <h4>{{ user.name }}</h4>
+              <p>{{ user.email }}</p>
+            </div>
+          </div>-->
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
